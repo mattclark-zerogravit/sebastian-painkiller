@@ -1,8 +1,20 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import issueList from '../imports/components/issueList/issueList';
+import todosList from '../imports/components/todosList/todosList';
+import '../imports/startup/accounts-config.js';
 
 angular.module('painkiller', [
   angularMeteor,
-  issueList.name
+  todosList.name,
+  'accounts.ui'
 ]);
+
+function onReady() {
+  angular.bootstrap(document, ['painkiller']);
+}
+
+if (Meteor.isCordova) {
+  angular.element(document).on('deviceready', onReady);
+} else {
+  angular.element(document).ready(onReady);
+}
